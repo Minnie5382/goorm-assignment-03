@@ -14,7 +14,6 @@ async function getUser(event) {
          
         const res = await fetch(`https://api.github.com/users/${username}`);
         if (res) { // 이미 결과가 있을 경우
-            // avatarElement.removeElement();
             userProfile.innerHTML = '';
             repoTitle.innerHTML = '';
             repoListElement.innerHTML = '';
@@ -23,8 +22,6 @@ async function getUser(event) {
         if(res.ok) {
             const data = await res.json();
             const user = new User(data);
-
-            console.log("user", user);
 
             // user_profile 노드 추가
             const {avatarElement, userInfoElement} = createUserNodes(user);
@@ -37,8 +34,6 @@ async function getUser(event) {
                 const repoItem = createRepoNodes(repo);
                 repoListElement.appendChild(repoItem);
             });
-
-            console.log("latest Repos", latestRepos);
         } 
         else {
             userProfile.innerHTML = `<div class="error">존재하지 않는 사용자입니다.</div>`;
@@ -79,7 +74,6 @@ async function getRepoList(username) {
             dataList.forEach((data) => {
                 let repo = new Repo(data);
                 repo.userId = data.owner.id;
-
                 repoList.push(repo);
             });
         } else { 
@@ -175,8 +169,6 @@ function createUserNodes(user) {
 
 // 레포 노드 생성
 function createRepoNodes(repo) {
-    // try {
-        //repo item
         const repoItemElement = document.createElement('div');
         repoItemElement.classList.add('repo_item');
 
@@ -214,7 +206,4 @@ function createRepoNodes(repo) {
         repoInfo.appendChild(forksElement);
 
         return repoItemElement;
-    // } catch (err) {
-    //     console.log(err);
-    // }
 }
