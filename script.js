@@ -135,21 +135,25 @@ function createUserNodes(user) {
     const companyElement = document.createElement('div');
     companyElement.classList.add('company');
     companyElement.innerHTML = `Company : `;
+    user.company = user.company == null ? 'none' : `${user.company}`;
     companyElement.innerHTML += `<span>${user.company}</span>`;
 
     const locationElement = document.createElement('div');
     locationElement.classList.add('location');
     locationElement.innerHTML = `Location : `;
+    user.location = user.location == null ? 'none' : `${user.location}`;
     locationElement.innerHTML += `<span>${user.location}</span>`;
 
     const emailElement = document.createElement('div');
     emailElement.classList.add('email');
     emailElement.innerHTML = `Email : `;
+    user.email = user.email == null ? 'none' : `${user.email}`;
     emailElement.innerHTML += `<span>${user.email}</span>`;
 
     const blogElement = document.createElement('div');
     blogElement.classList.add('blog');
     blogElement.innerHTML = `Blog : `;
+    user.blog = user.blog == '' ? 'none' : `${user.blog}`;
     blogElement.innerHTML += `<span>${user.blog}</span>`;
 
     userInfoElement.appendChild(numbersElement);
