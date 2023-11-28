@@ -1,13 +1,13 @@
 
 
-#latest_repos .repo_title {
+.latest_repos .repo_title {
     font-size: 30px;
     font-weight: bold;
     padding: 10px 0;
 
 }
 
-#latest_repos .repo_item {
+.latest_repos .repo_item {
     border: solid 1px #d4dfe6;
     border-radius: 5px;
     padding: 15px 23px;
@@ -16,7 +16,7 @@
     justify-content: space-between;
 }
 
-#latest_repos .repo_info_item {
+.latest_repos .repo_info_item {
     border-radius: 4px;
     background-color: #6aafe6;
     margin-right: 5px;

@@ -1,6 +1,8 @@
 const input = document.querySelector('#username');
 const userProfile = document.querySelector('.user_profile');
-const latestRepos = document.querySelector('#latest_repos');
+const latestRepos = document.querySelector('.latest_repos');
+const repoTitle = document.querySelector('.repo_title');
+const repoListElement = document.querySelector('.repo_list');
 
 // username 입력했을 때 
 input.addEventListener('keydown', getUser);
@@ -9,8 +11,14 @@ input.addEventListener('keydown', getUser);
 async function getUser(event) {
     if (event.keyCode === 13 || event.key === 'Enter') {
         const username = this.value;
-        
+         
         const res = await fetch(`https://api.github.com/users/${username}`);
+        if (res) { // 이미 결과가 있을 경우
+            // avatarElement.removeElement();
+            userProfile.innerHTML = '';
+            repoTitle.innerHTML = '';
+            repoListElement.innerHTML = '';
+        } 
         console.log(res);
         if(res.ok) {
             const data = await res.json();
@@ -27,7 +35,7 @@ async function getUser(event) {
             const repoList = await getRepoList(username);
             repoList.forEach((repo) => {
                 const repoItem = createRepoNodes(repo);
-                latestRepos.appendChild(repoItem);
+                repoListElement.appendChild(repoItem);
             });
 
             console.log("latest Repos", latestRepos);
@@ -56,7 +64,6 @@ class Repo {
             this[property] = data[property];
         });
     }
-    
 }
 
 // repo list 만드는 함수
@@ -81,7 +88,7 @@ async function getRepoList(username) {
         return repoList;
 }
 
-// 노드 생성 및 삽입
+// 유저 노드 생성
 function createUserNodes(user) {
     const avatarElement = document.createElement('div');
     avatarElement.classList.add('avatar');
@@ -166,8 +173,9 @@ function createUserNodes(user) {
     return {avatarElement, userInfoElement};
 }
 
+// 레포 노드 생성
 function createRepoNodes(repo) {
-    try {
+    // try {
         //repo item
         const repoItemElement = document.createElement('div');
         repoItemElement.classList.add('repo_item');
@@ -206,7 +214,7 @@ function createRepoNodes(repo) {
         repoInfo.appendChild(forksElement);
 
         return repoItemElement;
-    } catch (err) {
-        console.log(err);
-    }
+    // } catch (err) {
+    //     console.log(err);
+    // }
 }
